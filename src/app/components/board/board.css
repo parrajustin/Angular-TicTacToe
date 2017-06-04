@@ -1,0 +1,131 @@
+/* Search card's bottom spacing to seperate it from the table card*/
+.search-card {
+  margin-bottom: 5px;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+/* Applies some fixes to the cards so that I can apply headers to them*/
+.card-list { 
+  height: 100%;
+  max-height: calc(100% - 124px);
+}
+
+.card-footer {
+  height: 30px;
+  max-height: 30px;
+  margin-top: 5px;
+}
+/*
+  Applies fixes to the list home page css so that the card covers the whole page
+*/
+.list-fix {
+  /* 64 px top header
+    5 px top hearer bottom margin
+    30 px footer
+    5 px footer top margin */
+  max-height: calc(100% - 64px - 36px - 5px - 30px - 5px) !important; 
+  max-width: 100%;
+  overflow-x: hidden;
+
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.header-text {
+  font-size: 24px;
+}
+
+.search-input {
+  margin-bottom: 5px !important;
+}
+
+.column-headers {
+  height: 24px;
+}
+
+.list-header-fix {
+  height: 100px;
+}
+
+.card-table-header {
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+}
+/* Fixes the dimensions of the container for the home list headers */
+.list-header {
+  height: 36px;
+  width: 100%;
+}
+.list-content {
+  height: 0px;
+  width: 100%;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+  margin-bottom: 5px;
+}
+
+.search-header {
+  margin-bottom: 5px;
+}
+
+
+
+
+
+.inner-card-table-content {
+  width: auto;
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Css class for the TR list element headers that contain tr#, state, eng, nb, and any other header data*/
+.tr-data-head {
+  height: 15px;
+}
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.list-title {
+  width: 36%;
+  height: 32px;
+  font-size: 20px;
+  float: left;
+}
+
+.list-desc {
+  width: auto;
+  height: 32px;
+  float: left;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  margin-right: 3px;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.float-left {
+  float: left;
+}
+
+.icon-button {
+  cursor: pointer;
+}
