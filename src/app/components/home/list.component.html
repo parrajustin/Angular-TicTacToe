@@ -1,0 +1,249 @@
+<md-card class="search-card">
+  <md-card-title class="search-header">
+    Search {{ getDataName() }}s:
+  </md-card-title>
+  <md-card-content>
+    <md-input-container class="u-full-width search-input">
+      <input mdInput placeholder="Search/Filter Existing TRs by Number, State, Title, Engineer, or Status" value=""/>
+    </md-input-container>
+  </md-card-content>
+</md-card>
+
+<md-card class="card card-list" [style.height.px]="listCardHeight">
+  <md-card-header class="card-header list-header-fix">
+    <div fxLayout="column" fxFlexFill>
+      <div fxFlex="1 1 100%" class="u-full-width mat-calendar-body-selected" fxLayout="row">
+        <div fxFlex="0 0 24px"></div>
+
+        <div class="header-text" fxFlex="0 0 auto" fxLayoutAlign="start center">
+          Element List
+        </div>
+
+        <div fxFlex="1 1 100%"></div>
+
+        <div fxFlex="0 0 27px" fxLayoutAlign="start center">
+          <div *ngIf="isTR()">
+            <button mdTooltip="Add a new TR" mdTooltipPosition="above" (click)="add()" class="app-icon-button">
+              <i class="material-icons">add</i>
+            </button>
+          </div>
+
+          <div *ngIf="isOrder()">
+            <button mdTooltip="Add a new Order from template" mdTooltipPosition="above" (click)="add()" class="app-icon-button">
+              <i class="material-icons">add</i>
+            </button>
+          </div>
+
+          <div *ngIf="isSite()">
+            <button mdTooltip="Add a new Site" mdTooltipPosition="above" (click)="add()" class="app-icon-button">
+              <i class="material-icons">add</i>
+            </button>
+          </div>
+
+          <div *ngIf="isPart()">
+            <button mdTooltip="Add a new Part" mdTooltipPosition="above" (click)="add()" class="app-icon-button">
+              <i class="material-icons">add</i>
+            </button>
+          </div>
+        </div>
+
+        <div fxFlex="0 0 24px"></div>
+
+        <div fxFlex="0 0 27px" fxLayoutAlign="start center">
+          <!--<md-menu #appMenu="mdMenu">
+            <button md-menu-item> Settings </button>
+            <button md-menu-item> Help </button>
+          </md-menu>-->
+
+          <!--<button [mdMenuTriggerFor]="appMenu" mdTooltip="Options" mdTooltipPosition="above" class="app-icon-button">-->
+          <button mdTooltip="Options" mdTooltipPosition="above" class="app-icon-button">
+            <i class="material-icons">more_vert</i>
+          </button>
+        </div>
+
+        <div fxFlex="0 0 14px"></div>
+      </div>
+
+      <div class="card-table-header" fxLayout="row" fxFlex="0 0 36px">
+        <div fxFlex="0 0 24px"></div>
+
+        <div *ngFor="let head of headers" fxFlex="1 1 100%" fxLayout="row">
+          <div class="noselect" fxLayoutAlign="start center">
+            {{ head.value }}
+          </div>
+          <!--<button mdTooltip="Ascending" mdTooltipPosition="above" class="app-icon-button" (click)="asc(head.type)">
+            <i class="material-icons">keyboard_arrow_up</i>
+          </button>  
+          <button mdTooltip="Descending" mdTooltipPosition="above" class="app-icon-button" (click)="dsc(head.type)">
+            <i class="material-icons">keyboard_arrow_down</i>
+          </button>-->
+        </div>
+
+        <div *ngIf="isTR()" fxLayout="row" fxFlex="0 0 54px">
+        </div>
+
+        <div *ngIf="isOrder()" fxLayout="row" fxFlex="0 0 81px">
+        </div>
+
+        <div *ngIf="isSite()" fxLayout="row"  fxFlex="0 0 115px">
+        </div>
+
+        <div *ngIf="isPart()" fxLayout="row"  fxFlex="0 0 142px">
+        </div>
+
+        <div fxFlex="0 0 24px"></div>
+      </div>
+    </div>
+      <!--<div class="list-header" fxLayout="row" *ngIf="listDataSet">
+      </div>-->
+  </md-card-header>
+
+  <!--{{ scrollStartIndex }}
+  {{ scrollStopIndex }}
+  {{ length }}-->
+
+  <md-card-content class="card-content list-fix">
+      <!--<div fxFlex="0 0 36px" fxLayoutAlign="start center">
+        <div class="u-full-width column-headers">
+          test
+        </div>
+      </div>
+
+      <div fxFlex="1 1 calc(100% - 36px)" fxLayoutAlign="start center">-->
+        
+    <scrollWrapper [numElements]="length" [elementHeight]="42" [scrollStartIndex]="scrollStartIndex" [scrollStopIndex]="scrollStopIndex">
+      <div *ngIf="scrollStartIndex != scrollStopIndex">
+        <div *ngFor="let data of (listData | myGetData: scrollStartIndex:scrollStopIndex:listOrder)">
+          <div class="list-header" fxLayout="column" fxLayout.gt-xs="row">
+            <div fxFlex="0 0 24px"></div>
+
+            <div *ngFor="let sub of (data | myGetHeaders: dataName:trSitesList:sitesList)" fxFlex="1 1 100%" fxLayout="row">
+              <div fxLayoutAlign="start center" fxFlex="1 1 100%">
+                <p class="overflow-ellipsis">{{ sub }}</p>
+              </div>
+            </div>
+
+            <div *ngIf="isTR()" fxLayout="row" fxFlex="0 0 54px">
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Edit TRs" mdTooltipPosition="above" (click)="edit(data.id)" class="app-icon-button">
+                  <i class="material-icons icon-button">edit</i>
+                </button>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button (click)="view(data.id)" mdTooltip="View TR" mdTooltipPosition="above" class="app-icon-button">
+                  <i class="material-icons icon-button">remove_red_eye</i>
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="isOrder()" fxLayout="row" fxFlex="0 0 81px">
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Copy to New" mdTooltipPosition="above" class="app-icon-button">
+                  <i class="material-icons icon-button">content_copy</i>
+                </button>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Edit Order" mdTooltipPosition="above" class="app-icon-button">
+                  <i class="material-icons icon-button">edit</i>
+                </button>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Review Order" mdTooltipPosition="above" class="app-icon-button">
+                  <i class="material-icons icon-button">remove_red_eye</i>
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="isSite()" fxLayout="row"  fxFlex="0 0 115px">
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Edit Site" mdTooltipPosition="above" class="app-icon-button" (click)="edit(data.id)">
+                  <i class="material-icons float-left icon-button">edit</i>
+                </button>
+              </div>
+              <button (click)="view(data.id)" md-raised-button>Open</button>
+            </div>
+
+            <div *ngIf="isPart()" fxLayout="row"  fxFlex="0 0 142px">
+              <div fxLayoutAlign="start center">
+                <div *ngIf="(data.id | myInCart: cart); else elseBlock">
+                  <button mdTooltip="Add to cart" mdTooltipPosition="above" (click)="cartEvent(data, true)" class="app-icon-button">
+                    <i class="material-icons float-left icon-button">remove_shopping_cart</i>
+                  </button>
+                </div>
+                <ng-template #elseBlock>
+                  <button mdTooltip="Add to cart" mdTooltipPosition="above" (click)="cartEvent(data, false)" class="app-icon-button">
+                    <i class="material-icons float-left icon-button">add_shopping_cart</i>
+                  </button>
+                </ng-template>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button (click)="edit(data.id)" mdTooltip="Edit Part" mdTooltipPosition="above" class="app-icon-button">
+                  <i class="material-icons float-left icon-button">edit</i>
+                </button>
+              </div>
+              <button (click)="view(data.id)" md-raised-button>Open</button>
+            </div>
+
+            <div fxFlex="0 0 24px"></div>
+          </div>
+
+          <div class="list-content" fxLayout="column" fxLayout.gt-xs="row">
+            <!--<div *ngIf="dataName == 'TR'" class="list-title" fxFlex="0 1 30%">
+              {{ data.title }}
+            </div>
+            <div class="list-desc" fxFlex="1 1 auto">
+              {{ data.description }}
+            </div>-->
+            <!--{{ data | json }}-->
+          </div>
+        </div>
+      </div>
+
+    </scrollWrapper>
+  </md-card-content>
+
+  <!--
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //      ffffffffffffffff    iiii                                               lllllll                                                    
+  //     f::::::::::::::::f  i::::i                                              l:::::l                                                    
+  //    f::::::::::::::::::f  iiii                                               l:::::l                                                    
+  //    f::::::fffffff:::::f                                                     l:::::l                                                    
+  //    f:::::f       ffffffiiiiiii xxxxxxx      xxxxxxx         cccccccccccccccc l::::l   aaaaaaaaaaaaa      ssssssssss       ssssssssss   
+  //    f:::::f             i:::::i  x:::::x    x:::::x        cc:::::::::::::::c l::::l   a::::::::::::a   ss::::::::::s    ss::::::::::s  
+  //   f:::::::ffffff        i::::i   x:::::x  x:::::x        c:::::::::::::::::c l::::l   aaaaaaaaa:::::ass:::::::::::::s ss:::::::::::::s 
+  //   f::::::::::::f        i::::i    x:::::xx:::::x        c:::::::cccccc:::::c l::::l            a::::as::::::ssss:::::ss::::::ssss:::::s
+  //   f::::::::::::f        i::::i     x::::::::::x         c::::::c     ccccccc l::::l     aaaaaaa:::::a s:::::s  ssssss  s:::::s  ssssss 
+  //   f:::::::ffffff        i::::i      x::::::::x          c:::::c              l::::l   aa::::::::::::a   s::::::s         s::::::s      
+  //    f:::::f              i::::i      x::::::::x          c:::::c              l::::l  a::::aaaa::::::a      s::::::s         s::::::s   
+  //    f:::::f              i::::i     x::::::::::x         c::::::c     ccccccc l::::l a::::a    a:::::assssss   s:::::s ssssss   s:::::s 
+  //   f:::::::f            i::::::i   x:::::xx:::::x        c:::::::cccccc:::::cl::::::la::::a    a:::::as:::::ssss::::::ss:::::ssss::::::s
+  //   f:::::::f            i::::::i  x:::::x  x:::::x        c:::::::::::::::::cl::::::la:::::aaaa::::::as::::::::::::::s s::::::::::::::s 
+  //   f:::::::f            i::::::i x:::::x    x:::::x        cc:::::::::::::::cl::::::l a::::::::::aa:::as:::::::::::ss   s:::::::::::ss  
+  //   fffffffff            iiiiiiiixxxxxxx      xxxxxxx         ccccccccccccccccllllllll  aaaaaaaaaa  aaaa sssssssssss      sssssssssss    
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //                                                                                                                                        
+  //                                                                                                                                        
+  -->
+  <md-card-footer class="card-footer mat-calendar-body-selected">
+    <div fxLayout="row" class="u-full-width u-full-height">
+      <div fxFlex="1 1 100%"></div>
+
+      <div fxFlex="0 0 auto" fxLayoutAlign="start center">
+        <div *ngIf="scrollStartIndex != scrollStopIndex; else other">
+          {{ scrollStartIndex + 1 }}-{{ scrollStopIndex }} of {{ length }}
+        </div>
+
+        <ng-template #other>
+          0-0 of 0
+        </ng-template>
+      </div>
+
+      <div fxFlex="0 0 14px"></div>
+    </div>
+  </md-card-footer>
+</md-card>

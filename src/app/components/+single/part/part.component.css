@@ -1,0 +1,151 @@
+/*styles for home content only*/
+.add-tr {
+  padding-bottom: 0px !important;
+  height: 750px;
+}
+
+.full-cards {
+  width: calc(100% - 56px);
+  height: calc(100% - 56px);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.full-width {
+  width: 100%;
+}
+.full-height {
+  height: 100%;
+}
+.float-right {
+  float: right;
+}
+
+.add-tr-tile {
+  height: 100px;
+  padding: 0px 0px 0px 0px !important; 
+}
+
+.card-table { 
+  /* gets rid of the padding so the tool
+    fits nicely in the card */
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  width: calc(100% - 48px);
+  height: auto;
+
+  margin: auto;
+  margin-bottom: 10px !important;
+}
+.card-table-content-fix {
+  /* re-adds the padding so the content looks good */
+  padding-top: 15px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.right {
+  height: 250px;
+}
+
+#second {
+  margin-top: 250px !important;
+}
+#third {
+  margin-top: 500px !important;
+}
+
+.text-area-fix {
+  margin-top: 25px;
+}
+
+
+
+/* The container for the whole add view */
+.add-container {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+/* Used to fix the spacing on the md-select components */
+.select-spacing {
+  margin-bottom: 14px;
+  margin-top: 12px;
+}
+/* Used to fix teh spacing on option components */
+.option-spacing {
+  margin-bottom: 5px;
+}
+
+
+.attachment-divider {
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+
+.add-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  z-index: 99999;
+
+  background-color: rgba(40, 40, 40, 0.6);
+}
+
+
+
+
+
+.narrowMargin {
+  margin-bottom: 5px;
+}
+
+/* Styling for the overlay that is used when adding a data entry */
+.add-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  z-index: 99999;
+
+  background-color: rgba(40, 40, 40, 0.6);
+}
+
+.add-box {
+  border: 1px solid black;
+}
+
+.add-row {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.shroud {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(100, 100, 100, 0.5);
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+
+.bulk-container {
+  overflow-y: auto;
+}
+
+.bulk-entry {
+  height: auto;
+  min-height: 25px;
+}

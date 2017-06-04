@@ -1,0 +1,107 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+}
+
+a.active {
+  background-color: gray;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  margin-right: 3px;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.md-sidenav-left {
+  width: 220px;
+  overflow-y: hidden;
+}
+
+main {
+  width: 100%;
+  height: calc(100% - 64px);
+  /*width: auto;
+  max-width: 960px;
+  margin: auto;
+
+  padding-left: 5px;
+  padding-right: 5px;*/
+}
+
+md-sidenav-container {
+  height: 100%;
+}
+
+.toolbar-container {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+.sidebar-nav-container {
+  height: calc(100% - 74px);
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  border-right: 1px solid lightgray;
+}
+
+.divider-list {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 5px;
+}
+
+.nav-div {
+  cursor: pointer
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.main-container {
+  height: calc(100% - 10px);
+  width: auto;
+
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.scroll-container-app {
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+
+  height: auto;
+  min-height: 100%;
+}
+
+.selected {
+  background-color: lightgray;
+}

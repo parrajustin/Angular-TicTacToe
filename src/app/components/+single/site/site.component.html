@@ -1,0 +1,218 @@
+
+<div class="add-container" fxLayout="column" fxLayout.gt-sm="row">
+  <div fxFlex="1 1 100%" fxFlex.gt-sm="1 1 50%">
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Site Details
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_name" required placeholder="Name" name="Name" maxlength="45"/>
+            </md-input-container>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_clli" placeholder="CLLI" name="CLLI" maxlength="45"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_callSign" placeholder="Callsign" name="Callsign" maxlength="20"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_address" placeholder="Address" name="Address" maxlength="255"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <!--<tag-input [readonly]="isReadOnly()" name="States" [(ngModel)]="modelArray['states']" [onlyFromAutocomplete]="true" [placeholder]="'Add aditional States'" [secondaryPlaceholder]="'Enter State(s)'">
+              <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="autocompleteStates">
+              </tag-input-dropdown>
+            </tag-input>-->
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Additional Details
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_geo" placeholder="GEO" name="GEO" maxlength="10"/>
+            </md-input-container>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.site_par" placeholder="PAR" name="PAR" maxlength="10"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" type="number" mdInput [(ngModel)]="model.site_latitude" placeholder="LAT" name="LAT" step="any"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" type="number" mdInput [(ngModel)]="model.site_longitude" placeholder="LON" name="LON" step="any"/>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+  </div>
+
+  <div class="right-container" fxFlex="1 1 100%" fxFlex.gt-sm="1 1 50%"> 
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Site Tower Details
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" type="number" mdInput [(ngModel)]="model.site_tower_asr" placeholder="ASR" name="ASR"/>
+            </md-input-container>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" type="text" mdInput [(ngModel)]="model.site_tower_model" placeholder="Model" name="Model" maxlength="45"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" type="text" mdInput [(ngModel)]="model.site_tower_location" placeholder="Location" name="Location" maxlength="255"/>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center">
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          <div fxLayout="row" class="full-width">
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              Attachments
+            </div>
+
+            <div *ngIf="!isReadOnly()" fxFlex="0 0 40px" fxLayoutAlign="start center">
+              <button (click)="addSite()" [style.marginLeft.px]="5" md-mini-fab><md-icon>add</md-icon></button>
+            </div>
+          </div>
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column" *ngFor="let attachmentModel of getAttachmentsArray()">
+          <div class="attachment-divider">
+            <div fxLayout="row" fxFlex="1 1 100%">
+              <div fxFlex="1 1 28px" fxLayoutAlign="start center" *ngIf="!isReadOnly()">
+                <button (click)="removeSite(attachmentModel.attachment_id)" class="app-icon-button">
+                  <i class="material-icons icon-button">highlight_off</i>
+                </button>
+              </div>
+              <div fxFlex="1 1 100%" fxLayout="row" *ngIf="!isReadOnly()">
+                <div fxFlex="1 1 50%">
+                  <md-select [(ngModel)]="attachmentModel.attachment_type" class="full-width select-spacing" placeholder="Type" name="Type">
+                    <md-option *ngFor="let type of types" [value]="type">{{ type }}</md-option>
+                  </md-select>
+                </div>
+                <div fxFlex="0 0 5px"></div>
+                <div fxFlex="1 1 50%">
+                  <md-input-container class="full-width" dividerColor="accent">
+                    <input [readonly]="isReadOnly()" mdInput [(ngModel)]="attachmentModel.attachment_title" required placeholder="Title" name="Title" maxlength="255"/>
+                  </md-input-container>
+                </div>
+              </div>
+
+              <div fxFlex="1 1 100%" fxLayout="row" *ngIf="isReadOnly()">
+                <div fxFlex="1 1 50%">
+                  {{ attachmentModel.attachment_type }}
+                </div>
+                <div fxFlex="0 0 5px"></div>
+                <div fxFlex="1 1 50%">
+                  {{ attachmentModel.attachment_title }}
+                </div>
+                <div fxFlex="0 0 5px"></div>
+                <div fxFlex="1 1 50%">
+                  {{ attachmentModel.attachment_date | date:'yMd' }}
+                </div>
+                <div fxFlex="0 0 5px"></div>
+                <div fxFlex="0 0 27px">
+                  <a class="full-width" download href="http://localhost:8080/api/site/file/{{ attachmentModel.attachment_path }}">
+                    <i class="material-icons float-left icon-button">file_download</i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex="1 1 100%" *ngIf="!isReadOnly()">
+              <input required type="file" (change)="fileChange($event, attachmentModel.attachment_id)" placeholder="Upload file..."/>
+            </div>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center" *ngIf="isReadOnly()"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Related TRs
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%" fxLayout="row" class="attachment-divider" *ngFor="let trModel of getTRs()">
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              {{ trModel.tr_number }}
+            </div>
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              {{ trModel.tr_title }}
+            </div>
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              {{ trModel.tr_date | date }}
+            </div>
+
+            <div fxFlex="0 0 24px" fxLayoutAlign="start center">
+              <a mdTooltip="Download" mdTooltipPosition="left" download href="">
+                <i class="material-icons icon-button">file_download</i>
+              </a>
+            </div>
+
+            <div fxFlex="0 0 29px" [style.marginLeft.px]="5" fxLayoutAlign="start center">
+              <button (click)="goToTR(trModel.tr_id)" mdTooltip="Download" mdTooltipPosition="left" class="app-icon-button">
+                <i class="material-icons icon-button">remove_red_eye</i>
+              </button>
+            </div>
+          </div> 
+        </div>
+      </md-card-content> 
+    </md-card>
+  </div>
+</div>

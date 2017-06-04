@@ -1,0 +1,108 @@
+/*styles for home content only*/
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.search-input {
+  width: 100%;
+}
+
+.mat-card-header {
+  height: 64px;
+}
+
+.tr-data {
+  height: 200px;
+}
+.card {
+  margin-bottom: 8px;
+}
+.tr-divider {
+  border-bottom: 1px black solid;
+}
+
+.card-table { 
+  /* gets rid of the padding so the tool
+    fits nicely in the card */
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+
+  height: calc(100% - 159px);
+}
+.card-table-content {
+  /* re-adds the padding so the content looks good */
+  /*padding-left: 24px;
+  padding-right: 24px;*/
+  width: auto;
+  height: calc(100% - 85px);
+
+  /*overflow-y: auto;*/
+}
+
+.inner-card-table-content {
+  width: auto;
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Css class for the TR list element headers that contain tr#, state, eng, nb, and any other header data*/
+.tr-data-head {
+  height: 15px;
+}
+/* Fixes the dimensions of the container for the home list headers */
+.list-header {
+  height: 36px;
+  width: 100%;
+}
+
+.list-title {
+  width: 36%;
+  height: 32px;
+  font-size: 20px;
+  float: left;
+}
+
+.list-desc {
+  width: auto;
+  height: 32px;
+  float: left;
+}
+
+.list-content {
+  height: 42px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+}
+
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  margin-right: 3px;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.float-left {
+  float: left;
+}
+
+.icon-button {
+  cursor: pointer;
+}

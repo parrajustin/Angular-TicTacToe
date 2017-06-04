@@ -1,0 +1,44 @@
+/*styles for Single Component content only*/
+
+
+.card-table { 
+  /* gets rid of the padding so the tool
+    fits nicely in the card */
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  width: calc(100% - 48px);
+  height: auto;
+
+  margin: auto;
+  margin-bottom: 10px !important;
+}
+
+
+.full-height {
+  /* Utility that makes someting have a full height */
+  height: 100%;
+}
+.full-width {
+  width: 100%;
+}
+
+.card-table-content-fix {
+  /* re-adds the padding so the content looks good */
+  padding-top: 15px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Styling for the overlay that is used when adding a data entry */
+.add-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  z-index: 99999;
+
+  background-color: rgba(40, 40, 40, 0.6);
+}

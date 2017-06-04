@@ -1,0 +1,261 @@
+
+<div class="add-container" fxLayout="column" fxLayout.gt-sm="row">
+  <div fxFlex="1 1 100%" fxFlex.gt-sm="1 1 50%">
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          TR Details
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.tr_number" required placeholder="Number" name="trNumber" maxlength="10"/>
+            </md-input-container>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.tr_title" placeholder="Title" name="Title" maxlength="255"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-select [(ngModel)]="model.tr_status" class="full-width select-spacing" required [disabled]="isReadOnly()" placeholder="Status">
+              <md-option *ngFor="let state of states" [value]="state">{{ state }}</md-option>
+            </md-select>
+          </div>
+
+          <div fxFlex="1 1 100%" class="area-spacing">
+            <md-input-container class="full-width">
+              <textarea mdInput [(ngModel)]="model.tr_modifications" rows="4" placeholder="Modifications:" [disabled]="isReadOnly()" value="" maxlength="500"></textarea>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%" class="area-spacing">
+            <md-input-container class="full-width">
+              <textarea mdInput [(ngModel)]="model.tr_comment" rows="4" placeholder="Comments:" [disabled]="isReadOnly()" value="" maxlength="500"></textarea>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+  </div>
+
+  <div class="right-container" fxFlex="1 1 100%" fxFlex.gt-sm="1 1 50%"> 
+    <md-card class="card card-center">
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          <div fxLayout="row" class="full-width">
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center" *ngIf="!isReadOnly()">
+              Upload TR *
+            </div>
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center" *ngIf="isReadOnly()">
+              TR file
+            </div>
+
+            <div *ngIf="isReadOnly()" fxFlex="0 0 40px" fxLayoutAlign="start center">
+              <a mdTooltip="Download" mdTooltipPosition="left" md-mini-fab download href="">
+                <i class="material-icons icon-button">file_download</i>
+              </a>
+            </div>
+
+            <div *ngIf="isReadOnly()" [style.marginLeft.px]="5" fxFlex="0 0 40px" fxLayoutAlign="start center">
+              <button mdTooltip="Preview" mdTooltipPosition="left" md-mini-fab>
+                <i class="material-icons icon-button">remove_red_eye</i>
+              </button>
+            </div>
+          </div>
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content" *ngIf="!isReadOnly()">
+        <div fxLayout="row">
+          <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+            TR File
+          </div>
+          <div fxFlex="0.3 0.3 100%" fxLayoutAlign="start center">
+              <input [required]="viewType == 'Edit'" type="file" (change)="fileChange($event)" placeholder="Upload file..."/>
+          </div>
+        </div> 
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center">
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          <div fxLayout="row" class="full-width">
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              Affected Sites *
+            </div>
+
+            <div *ngIf="!isReadOnly()" fxFlex="0 0 40px" fxLayoutAlign="start center">
+              <button (click)="addSitesPopup()" [style.marginLeft.px]="5" md-mini-fab><md-icon>add</md-icon></button>
+            </div>
+          </div>
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="row" *ngFor="let siteModel of ( siteStorage | myGetSelectedSite: getKeys() )">
+          <div fxFlex="0 0 28px" fxLayoutAlign="start center" *ngIf="!isReadOnly()">
+            <button (click)="removeSite(siteModel.site_id)" class="app-icon-button">
+              <i class="material-icons icon-button">highlight_off</i>
+            </button>
+          </div>
+          <div fxFlex="1 1 100%" fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="1 1 100%">
+              <md-input-container class="full-width" dividerColor="accent">
+                <input readonly mdInput [placeholder]="siteString(siteModel)" name="Site"/>
+              </md-input-container>
+            </div>
+            <div fxFlex="0 0 32px" [style.marginLeft.px]="5" fxLayoutAlign="start center" *ngIf="isReadOnly()">
+              <button class="app-icon-button" (click)="goToSite(siteModel.site_id)">
+                <i class="material-icons icon-button">remove_red_eye</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          TR Assignment
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-select [(ngModel)]="model.tr_engineer" class="full-width select-spacing" [disabled]="isReadOnly()" placeholder="Primary Engineer">
+              <md-option *ngFor="let state of states" [value]="state">{{ state }}</md-option>
+            </md-select>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-select [(ngModel)]="model.tr_engineer2" class="full-width select-spacing" [disabled]="isReadOnly()" placeholder="Second Engineer">
+              <md-option *ngFor="let state of states" [value]="state">{{ state }}</md-option>
+            </md-select>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center" *ngIf="isReadOnly()"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Related Orders
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+      </md-card-content> 
+    </md-card>
+  </div>
+</div>
+
+
+<div [hidden]="!selectSite" class="add-overlay">
+  <div fxLayout="column" class="full-height">
+    <div fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="center center">
+      <div fxLayout="column" fxFlex="0 1 900px" fxLayoutAlign="center center">
+        <md-card class="card card-center"> 
+          <md-card-header class="card-header">
+            <md-toolbar color="primary">
+              <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                Add Affected Site
+              </div>
+
+              <div fxFlex="0 0 40px" fxLayoutAlign="start center">
+                <button (click)="exit()" [style.marginLeft.px]="5" md-mini-fab><md-icon>highlight_off</md-icon></button>
+              </div>
+            </md-toolbar>
+          </md-card-header>
+
+          <md-card-content class="card-content"> 
+            <div fxLayout="column" fxFlex="1 1 100%" fxLayoutAlign="center center">
+              <div fxFlex="1 1 100%" fxLayoutAlign="center center">
+                Enter site name, call sign, clli, or state to search
+              </div>
+
+              <div fxFlex="1 1 100%" fxLayoutAlign="center center" class="full-width">
+                <md-input-container class="full-width" dividerColor="accent">
+                  <input mdInput placeholder="Search"/>
+                </md-input-container>
+              </div>
+
+              <div fxLayout="row" class="full-width">
+                <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                  Results:
+                </div>
+              </div>
+
+            <!--<div fxFlex="0 0 250px" fxLayout="row" class="full-width">
+                  <div fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="start center" class="add-box">
+                    <div fxLayout="row" fxFlex="0 0 auto" *ngFor="let siteModel of siteStorage" class="add-row">
+                      <div fxFlex="0 0 5px"></div>
+                      <div fxFlex="0 0 28px" fxLayoutAlign="start center">
+                        <md-checkbox disabled [checked]="getSite(siteModel.site_id)" (click)="flipSite(siteModel.site_id)"></md-checkbox>
+                      </div>
+                      <div fxFlex="0 0 5px"></div>
+                      <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                        {{ siteString(siteModel) }}
+                      </div>
+                      <div fxFlex="0 0 5px"></div>
+                    </div>
+                  </div>
+                </div>-->
+
+                <!--<div fxFlex="0 0 250px" fxLayoutAlign="start start" class="u-full-width add-box" track-scroll (outerHeight)="setHeight($event)" (distances)="setDistances($event)">
+                  <div [style.height.px]="getHeight()" class="u-full-width">
+                    <div [style.height.px]="scrollTopDivHeight"></div>
+
+                    <div *ngIf="scrollStartIndex != scrollStopIndex">
+                      <div *ngFor="let siteModel of (siteStorage | myGetData: scrollStartIndex:scrollStopIndex)" fxLayout="row" [style.height.px]="30">
+                        <div fxFlex="0 0 5px"></div>
+                        <div fxFlex="0 0 28px" fxLayoutAlign="start center">
+                          <md-checkbox disabled [checked]="getSite(siteModel.site_id)" (click)="flipSite(siteModel.site_id)"></md-checkbox>
+                        </div>
+                        <div fxFlex="0 0 5px"></div>
+                        <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                          {{ siteString(siteModel) }}
+                        </div>
+                        <div fxFlex="0 0 5px"></div>
+                      </div>
+                    </div>
+
+                    <div [style.height.px]="scrollBottomDivHeight"></div>
+                  </div>
+                </div>-->
+
+              <div fxLayout="row" class="full-width">
+                <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                  Can't find the site? Try a different search criteria, or below to add a new site:
+                </div>
+              </div>
+              <div fxLayout="row" class="full-width">
+                <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+                  <button md-raised-button (click)="newSite()" color="accent">Add new Site</button>
+                </div>
+              </div>
+              <div fxFlex="0 0 5px">
+              </div>
+              <div fxLayout="row" class="full-width">
+                <div fxFlex="1 1 50%" fxLayoutAlign="start center">
+                  <button md-raised-button (click)="exit()" color="accent" class="full-width">Cancel</button>
+                </div>
+                <div fxFlex="1 1 50%" fxLayoutAlign="start center">
+                  <button md-raised-button (click)="addExit()" color="accent" class="full-width">Add</button>
+                </div>
+              </div>
+            </div>
+          </md-card-content> 
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>

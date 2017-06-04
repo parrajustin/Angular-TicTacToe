@@ -1,0 +1,22 @@
+
+
+/* used to define the padding for the content within the material cards */
+.card-my-content {
+  height: calc(100%);
+}
+
+/* used to fix the material card headers */
+.card-table-header {
+  height: 64px;
+  margin-bottom: 10px;
+}
+
+.u-full-width {
+  width: 100%;
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

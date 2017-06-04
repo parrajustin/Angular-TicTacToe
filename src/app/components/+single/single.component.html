@@ -1,0 +1,70 @@
+<!--DELETE ME, DEBUGGING: {{ model | json }}
+{{ modelArray | json }}
+{{ files | json }}-->
+
+<!--{{ viewType }}-->
+
+<!--{{ files | json }}-->
+
+<form #addForm="ngForm" class="full-height">
+  <div *ngIf="isSite()">
+    <siteAdd [viewType]="viewType" [model]="model" [modelArray]="modelArray" [files]="files" (onInit)="ngAfterContentChecked()"></siteAdd>
+  </div>
+
+  <div *ngIf="isTR()">
+    <trAdd [viewType]="viewType" [model]="model" [modelArray]="modelArray" [files]="files" (onInit)="ngAfterContentChecked()"></trAdd>
+  </div>
+
+  <div *ngIf="isPart()">
+    <partAdd [viewType]="viewType" [model]="model" [modelArray]="modelArray" (onInit)="ngAfterContentChecked()"></partAdd>
+  </div>
+
+  <div *ngIf="isOrder()">
+    <orderAdd [viewType]="viewType" [model]="model" [modelArray]="modelArray" (onInit)="ngAfterContentChecked()"></orderAdd>
+  </div>
+
+  <!--<md-card class="card-table"> 
+    <md-card-header> 
+      <md-toolbar color="primary">
+        <div fxLayout="row" class="full-width">
+
+          <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+            <button md-raised-button (click)="goHome()" color="accent" class="full-height">Return Home</button>
+          </div>
+
+          <div fxFlex="0 0 88px" fxLayoutAlign="end center" *ngIf="viewType == 'Add'">
+            <button md-raised-button (click)="reset()" color="accent" class="full-height">Reset</button>
+          </div>  
+
+          <div fxFlex="0 0 5px" fxLayoutAlign="start center" *ngIf="viewType == 'Add'">
+          </div> 
+
+          <div fxFlex="0 0 88px" fxLayoutAlign="end center" *ngIf="!isReadOnly()">
+            <button type="submit" (click)="submit(addForm.form.valid)"  md-raised-button color="accent" class="full-height">
+              <span *ngIf="this.currentDataId == ''">Submit</span>
+              <span *ngIf="this.currentDataId != ''">Update</span>
+            </button>
+          </div> 
+
+          <div fxFlex="0 0 88px" fxLayoutAlign="end center" *ngIf="isReadOnly()">
+            <button type="submit" (click)="goEdit()"  md-raised-button color="accent" class="full-height">
+              Edit
+            </button>
+          </div> 
+        </div>
+      </md-toolbar>
+    </md-card-header> 
+  </md-card>-->
+</form>
+
+
+<div [hidden]="!submitting" class="add-overlay">
+  <div fxLayout="column" class="full-height">
+    <div fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="center center">
+      <div fxLayout="column" fxFlex="1 1 100%" fxLayoutAlign="center center">
+        <md-progress-spinner color="accent" mode="indeterminate"> </md-progress-spinner>
+        {{ submitText }}
+      </div>
+    </div>
+  </div>
+</div>

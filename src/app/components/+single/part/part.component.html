@@ -1,0 +1,133 @@
+<div class="add-container" fxLayout="column" fxLayout.gt-sm="row">
+  <div fxFlex="1 1 100%" fxFlex.gt-sm="1 1 100%" *ngIf="!isBulk()">
+    <md-card class="card card-center"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Part Details
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content">
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.part_manufacturer" required placeholder="Manufacturer" name="Manufacturer" maxlength="200"/>
+            </md-input-container>
+          </div> 
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.part_model" required placeholder="Model" name="Model" maxlength="200"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%">
+            <md-input-container class="full-width" dividerColor="accent">
+              <input [readonly]="isReadOnly()" mdInput [(ngModel)]="model.part_type" required placeholder="Type" name="Type" maxlength="45"/>
+            </md-input-container>
+          </div>
+
+          <div fxFlex="1 1 100%" class="area-spacing">
+            <md-input-container class="full-width">
+              <textarea required mdInput [(ngModel)]="model.part_description" rows="4" placeholder="Description" [disabled]="isReadOnly()" value="" maxlength="255"></textarea>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+  </div>
+
+  <div class="right-container" fxFlex="1 1 100%" fxFlex.gt-sm="1 1 100%"> 
+    <md-card class="card card-center" *ngIf="viewType == 'View' || viewType == 'Edit'"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Related Orders
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          Orders
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center" *ngIf="viewType == 'Add'"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Bulk Upload
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 100%">
+            This application will parse well-formated lists of parts as long as they fit the template.
+            Parts that already exist in the system will not be duplicated, and will be safely ignored.
+            There may be erros in inputs that may make the same part appear twice (typos for instance)
+            - these must be corrected manually.
+          </div> 
+
+          <div fxFlex="0 0 5px">
+          </div>
+
+          <div fxFlex="1 1 100%" fxLayout="row">
+            Upload a file:
+
+            <div fxFlex="0 0 10px">
+            </div>
+
+            <div fxFlex="1 1 50%" fxLayoutAlign="start center">
+              <input type="file" (change)="fileChange($event)" placeholder="Upload file..."/>
+            </div>
+          </div>
+
+          <div fxFlex="0 0 10px">
+          </div>
+
+          <div fxFlex="1 1 100%" fxLayout="row">
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              <button md-raised-button class="full-width" (click)="download()">Download Template</button>
+            </div>
+
+            <div fxFlex="0 0 5px">
+            </div>
+
+            <div fxFlex="1 1 100%" fxLayoutAlign="start center">
+              <button md-raised-button (click)="upload()" class="full-width">Upload</button>
+            </div>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+
+    <md-card class="card card-center" *ngIf="isBulk()"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Preview Added Parts
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content"> 
+        <div fxLayout="column">
+          <div fxFlex="1 1 350px" fxLayout="column" class="bulk-container">
+            <div fxFlex="1 1 55px" fxLayout="row" class="attachment-divider bulk-entry" *ngFor="let partModel of getParts()">
+              <div fxFlex="1 1 100%">
+                <p class="overflow-ellipsis">{{ partModel.part_manufacturer }}</p>
+              </div>
+              <div fxFlex="1 1 100%">
+                <p class="overflow-ellipsis">{{ partModel.part_model }}</p>
+              </div>
+              <div fxFlex="1 1 100%">
+                <p class="overflow-ellipsis">{{ partModel.part_type }}</p>
+              </div>
+              <div fxFlex="1 1 100%">
+                <p class="overflow-ellipsis">{{ partModel.part_description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card-content> 
+    </md-card>
+  </div>
+</div>

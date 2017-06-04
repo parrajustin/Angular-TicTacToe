@@ -1,0 +1,138 @@
+
+  <!--{{ scrollTop | json }}
+  {{ scrollBottom | json }}
+  {{ scrollHeight | json }}
+  {{ scrollStartIndex | json }}
+  {{ scrollStopIndex | json }}
+  {{ scrollTopDivHeight | json }}
+  {{ scrollBottomDivHeight | json }}-->
+
+<md-card class="card card-center" [style.maxHeight.px]="0.75 * containerHeight">
+  <md-card-header class="card-header">
+    <md-toolbar color="primary">
+      <div class="u-full-width" fxLayout="row">
+        <div *ngFor="let head of trHeaders" fxFlex="1 1 100%" fxLayout="row">
+          <div fxLayout="row" fxFlex="1 1 100%" fxLayoutAlignment="start center">
+            <div fxLayoutAlign="start center">
+              <p class="overflow-ellipsis">{{ head.value }}</p>
+            </div>
+            <button mdTooltip="Ascending" mdTooltipPosition="right" class="app-icon-button" (click)="asc(head.type)">
+              <i class="material-icons">keyboard_arrow_up</i>
+            </button>  
+            <button mdTooltip="Descending" mdTooltipPosition="right" class="app-icon-button" (click)="dsc(head.type)">
+              <i class="material-icons">keyboard_arrow_down</i>
+            </button>  
+          </div>
+        </div>
+      </div>
+    </md-toolbar>
+  </md-card-header>
+
+  <md-card-content class="card-content" [style.maxHeight.px]="trCardContentHeight">
+    <scrollWrapper [numElements]="length" [elementHeight]="83" [(scrollStartIndex)]="scrollStartIndex[0]" [(scrollStopIndex)]="scrollStopIndex[0]">
+        <!--<div *ngIf="scrollStartIndex[0] != scrollStopIndex[0]">-->
+          <div *ngFor="let data of (assignedTRs | myGetData: trOrder:scrollStartIndex[0]:scrollStopIndex[0])">
+            <div class="list-header" fxLayout="column" fxLayout.gt-xs="row">
+              <div *ngFor="let sub of (data | myGetHeaders: trHeaderTemp)" fxFlex="1 1 100%" fxLayout="row">
+                <div fxLayoutAlign="start center">
+                  <p class="overflow-ellipsis">{{ sub }}</p>
+                </div>
+              </div>
+
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Edit TRs" mdTooltipPosition="left" (click)="edit(data.id, 'TR')" class="app-icon-button">
+                  <i class="material-icons icon-button">edit</i>
+                </button>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button (click)="view(data.id, 'TR')" mdTooltip="View TR" mdTooltipPosition="left" class="app-icon-button">
+                  <i class="material-icons icon-button">remove_red_eye</i>
+                </button>
+              </div>
+            </div>
+
+            <div class="list-content" fxLayout="column" fxLayout.gt-xs="row">
+              <div class="list-title" fxFlex="0 1 30%">
+                <p class="overflow-ellipsis">{{ data.tr_title }}</p>
+              </div>
+              <div class="list-desc" fxFlex="1 1 auto">
+                <p class="overflow-ellipsis">{{ data.tr_comment }}</p>
+              </div>
+            </div>
+          </div>
+        <!--</div>-->
+    </scrollWrapper>
+  </md-card-content>
+</md-card>
+
+
+
+
+
+
+
+
+<md-card class="card card-center" [style.maxHeight.px]="0.75 * containerHeight">
+  <md-card-header class="card-header">
+    <md-toolbar color="primary">
+
+      <div class="u-full-width" fxLayout="row">
+        <div *ngFor="let head of orderHeaders" fxFlex="1 1 100%" fxLayout="row">
+          <div fxLayout="row" fxFlex="1 1 100%" fxLayoutAlignment="start center">
+            <div fxLayoutAlign="start center">
+              {{ head.value }}
+            </div>
+            <button mdTooltip="Ascending" mdTooltipPosition="right" class="app-icon-button" (click)="asc(head.type)">
+              <i class="material-icons">keyboard_arrow_up</i>
+            </button>  
+            <button mdTooltip="Descending" mdTooltipPosition="right" class="app-icon-button" (click)="dsc(head.type)">
+              <i class="material-icons">keyboard_arrow_down</i>
+            </button>  
+          </div>
+        </div>
+      </div>
+    </md-toolbar>
+  </md-card-header>
+
+  <md-card-content class="card-content" [style.maxHeight.px]="trCardContentHeight">
+    <div track-scroll (outerHeight)="setHeight($event, 0)" (distances)="setDistances($event, 0)">
+      <div [style.height.px]="getHeight(0)">
+        <div [style.height.px]="scrollTopDivHeight[0]"></div>
+
+        <!--<div *ngIf="scrollStartIndex[0] != scrollStopIndex[0]">
+          <div *ngFor="let data of (assignedOrders | myGetData: trOrder:scrollStartIndex[0]:scrollStopIndex[0])">
+            <div class="list-header" fxLayout="column" fxLayout.gt-xs="row">
+              <div *ngFor="let sub of (data | myGetHeaders: orderHeaderTemp)" fxFlex="1 1 100%" fxLayout="row">
+                <div fxLayoutAlign="start center">
+                  <p class="overflow-ellipsis">{{ sub }}</p>
+                </div>
+              </div>
+
+              <div fxLayoutAlign="start center">
+                <button mdTooltip="Edit TRs" mdTooltipPosition="left" (click)="edit(data.id, 'Order')" class="app-icon-button">
+                  <i class="material-icons icon-button">edit</i>
+                </button>
+              </div>
+              <div fxLayoutAlign="start center">
+                <button (click)="view(data.id, 'Order')" mdTooltip="View TR" mdTooltipPosition="left" class="app-icon-button">
+                  <i class="material-icons icon-button">remove_red_eye</i>
+                </button>
+              </div>
+            </div>
+
+            <div class="list-content" fxLayout="column" fxLayout.gt-xs="row">
+              <div class="list-title" fxFlex="0 1 30%">
+                {{ data.title }}
+              </div>
+              <div class="list-desc" fxFlex="1 1 auto">
+                {{ data.description }}
+              </div>
+            </div>
+          </div>
+        </div>-->
+
+        <div [style.height.px]="scrollBottomDivHeight[0]"></div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>

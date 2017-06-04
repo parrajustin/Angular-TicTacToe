@@ -1,0 +1,8 @@
+.scroll-container {
+  width: calc(100% + 12px);
+  max-width: none;
+  height: 100%;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

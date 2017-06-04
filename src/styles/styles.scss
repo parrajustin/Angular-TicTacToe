@@ -1,0 +1,157 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+/* This file is for setting global styles  */
+@import 'variables';
+@import '~@angular/material/theming';
+
+$att-blue: (
+  50: #b3e4fd,
+  100: #8dd7fc,
+  200: #67c9fb,
+  300: #41bcf9,
+  400: #1baef8,
+  500: #0574ac,
+  600: #068ed2,
+  700: #0574ac,
+  800: #045a86,
+  900: #034160,
+  A100: #41bcf9,
+  A200: #2eb5f9,
+  A400: #1baef8,
+  A700: #08a7f8,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($att-blue);
+$candy-app-accent:  mat-palette($mat-orange, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+nav {
+  margin-top: 16px;
+}
+
+nav a {
+  background-color: $nav-button-color;
+  color: white;
+  padding: 8px 16px;
+  margin: 8px;
+  vertical-align: middle;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+// For the home list grid left align the text 
+.list-left-align > figure {
+  justify-content: flex-start !important;
+}
+
+/* This is for the tr table in the home folder */
+.card-header .mat-card-header-text {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+/* This removes the padding from md lists */
+.remove-padding-md-list .mat-list-item-content {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+main {
+  /*
+    Sets the main window, which is rendered by the router, to fill the screen
+    the 64px is the topbar header */
+  height: calc(100% - 64px);
+}
+
+
+
+
+
+
+/* Applies some fixes to the cards so that I can apply headers to them*/
+.card { 
+  /* gets rid of the padding so the tool
+    fits nicely in the card */
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+
+  height: auto;
+}
+
+/* Fixes the cards content so that it doesn't bud against the edges, reapplies padding
+  removed in the card css and other */
+.card-content {
+  padding-top: 0px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 5px;
+
+  height: calc(100%);
+  overflow-y: auto;
+
+  /* 64 px is the height of the toolbar 10 px is the bottom margin*/
+  max-height: calc(100% - 64px - 5px); 
+}
+
+/* used to fix the material card headers */
+.card-header {
+  height: 64px;
+  margin-bottom: 5px;
+}
+
+.card-center {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+.u-full-width {
+  width: 100%;
+}
+
+.u-full-height {
+  height: 100%;
+}

@@ -1,0 +1,240 @@
+<md-sidenav-container #master>
+  <md-sidenav #sidenav [mode]="modeSet" class="md-sidenav-left md-whiteframe-z2" [opened]="openedSet">
+    <md-toolbar color="primary">
+      <div fxLayout="row" class="full-width">
+        <div fxFlexAlign="start center" fxFlex="0 0 24px">
+          <button class="app-icon-button" (click)="sidenav.toggle()">
+            <i class="material-icons app-toolbar-close">close</i>
+          </button>
+        </div>
+
+        <div fxFlexAlign="center center" fxLayout="row" fxFlex="1 1 100%">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 51px">Menu</div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlexAlign="start center" fxFlex="0 0 24px">
+        </div>
+        
+      </div>
+    </md-toolbar>
+
+    <div fxLayout="column" class="sidebar-nav-container">
+      <div fxFlexAlign="start center" fxLayout="row" class="divider-list" fxFlex="0 0 46px" [ngClass]="[isTR() ? 'selected' : '']">
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="0 0 24px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button" (click)="trHome()">
+              <i class="material-icons app-toolbar-close">home</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="1 1 100%" (click)="trHome()" class="nav-div noselect">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 19px">
+            <span>Home: TR List</span>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexAlign="start center" fxLayout="column" fxFlex="0 0 27px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button" (click)="trAdd()">
+              <i class="material-icons app-toolbar-close">add_circle</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+      </div>
+
+      <div fxFlexAlign="start center" fxLayout="row" class="divider-list" fxFlex="0 0 46px" (click)="myAssignments()" [ngClass]="[isAssignment() ? 'selected' : '']">
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="0 0 24px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button">
+              <i class="material-icons app-toolbar-close">assignment_turned_in</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="1 1 100%" class="nav-div noselect">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 19px">
+            <span>My Assignments</span>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+      </div>
+
+      <div fxFlexAlign="start center" fxLayout="row" class="divider-list" fxFlex="0 0 46px" [ngClass]="[isSite() ? 'selected' : '']">
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="0 0 27px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button">
+              <i class="material-icons app-toolbar-close" (click)="siteHome()">account_balance</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="1 1 100%" (click)="siteHome()" class="nav-div noselect">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 19px">
+            <span>Site List</span>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexAlign="start center" fxLayout="column" fxFlex="0 0 27px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button" (click)="siteAdd()">
+              <i class="material-icons app-toolbar-close">add_circle</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+      </div>
+
+      <div fxFlexAlign="start center" fxLayout="row" class="divider-list" fxFlex="0 0 46px" [ngClass]="[isPart() ? 'selected' : '']">
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="0 0 24px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button">
+              <i class="material-icons app-toolbar-close" (click)="partHome()">new_releases</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="1 1 100%" (click)="partHome()" class="nav-div noselect">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 19px">
+            <span>Parts List</span>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexAlign="start center" fxLayout="column" fxFlex="0 0 27px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button" (click)="partAdd()">
+              <i class="material-icons app-toolbar-close">add_circle</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+      </div>
+
+      <div fxFlexAlign="start center" fxLayout="row" class="divider-list" fxFlex="0 0 46px" [ngClass]="[isOrder() ? 'selected' : '']">
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="0 0 24px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button">
+              <i class="material-icons app-toolbar-close" (click)="orderHome()">local_shipping</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexALign="start center" fxLayout="column" fxFlex="1 1 100%" (click)="orderHome()" class="nav-div noselect">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="center center" fxFlex="0 0 19px">
+            <span>Orders</span>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+
+        <div fxFlex="0 0 5px"></div>
+
+        <div fxFlexAlign="start center" fxLayout="column" fxFlex="0 0 27px">
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+          <div fxFlexAlign="start center" fxFlex="0 0 27px">
+            <button class="app-icon-button" (click)="orderAdd()">
+              <i class="material-icons app-toolbar-close">add_circle</i>
+            </button>
+          </div>
+          <div fxFlexAlign="start center" fxFlex="1 1 100%"></div>
+        </div>
+      </div>
+    </div>
+
+      <!--<md-toolbar-row>
+        <a md-button (click)="trHome()">TR List Home</a>
+      </md-toolbar-row>
+
+      <md-toolbar-row>
+        <a md-button (click)="siteHome()">Site List Home</a>
+      </md-toolbar-row>
+
+      <md-toolbar-row>
+        <a md-button (click)="partHome()">Part List Home</a>
+      </md-toolbar-row>
+
+      <md-toolbar-row>
+        <a md-button (click)="orderHome()">Order List Home</a>
+      </md-toolbar-row>
+
+      <md-toolbar-row>
+        <a md-button (click)="addSite()">add site</a>
+      </md-toolbar-row>
+    </md-toolbar>-->
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <div class="toolbar-container" fxLayout="row">
+      <div fxLayout="row" fxFlex="1 1 100%">
+        <button class="app-icon-button" (click)="sidenav.toggle()">
+          <i class="material-icons app-toolbar-menu">menu</i>
+        </button>
+        <div fxLayoutAlign="start center">
+          {{ header }}
+        </div>
+      </div>
+
+      <div fxFlex="[isPart() && !isView() && !isAdd() && !isEdit() ? '1 1 100%' : '0 0 88px']">
+        <div fxFlexALign="end center">
+          <button type="submit" (click)="headerButtonEvent()" md-raised-button color="accent" class="full-height">
+            <span *ngIf="isView()">Edit</span>
+            <span *ngIf="isAdd()">Submit</span>
+            <span *ngIf="isEdit()">Save</span>
+            <span *ngIf="isPart() && !isView() && !isAdd() && !isEdit()">Checkout {{ cartLength }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <main>
+    <div class="main-container" #mainContainer>
+      <div class="scroll-container-app">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+
+  <!--<footer>
+    <span>Test</span>
+  </footer>-->
+</md-sidenav-container>

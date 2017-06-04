@@ -1,0 +1,155 @@
+
+<!--{{ partList | json }}-->
+<!--{{ scrollStartIndex }} {{ scrollStopIndex }} {{ modelArray | json }}-->
+
+
+<div class="add-container" fxLayout="column">
+  <div fxFlex="1 1 100%" *ngIf="listSet">
+    <md-card class="card card-center" [style.height.px]="listCardHeight"> 
+      <md-card-header class="card-header">
+        <md-toolbar color="primary">
+          Order Parts List
+        </md-toolbar>
+      </md-card-header>
+
+      <md-card-content class="card-content">
+
+        <scrollWrapper [numElements]="numElements" [elementHeight]="55" [scrollStartIndex]="scrollStartIndex" [scrollStopIndex]="scrollStopIndex">
+
+              <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 55px" *ngFor="let model of orderList">
+                  <!--{{ model | json }}-->
+                  <div fxFlex="0 0 27px">
+                    <button (click)="removePart(part.part_id)" class="app-icon-button">
+                      <i class="material-icons icon-button">highlight_off</i>
+                    </button>
+                  </div>
+
+                  <div fxFlex="1 1 100%">
+                    {{ model.equip_ref_id }}
+                  </div>
+
+                  <div fxFlex="1 1 100%">
+                    {{ model.equipment_mfr }}
+                  </div>
+
+                  <div fxFlex="1 1 100%">
+                    {{ model.equipment_model_id }}
+                  </div>
+
+                  <div fxFlex="1 1 100%">
+                    {{ model.equipment_oin }}
+                  </div>
+
+                  <div fxFlex="0 0 5px"></div>
+
+                  <div fxFlex="1 1 100%" *ngIf="!model.part_has_size">
+                    <md-input-container class="full-width" dividerColor="accent">
+                      <input [readonly]="isReadOnly()" mdInput required placeholder="Quantity:" name="Quantity"/>
+                    </md-input-container>
+                  </div>
+
+                  <div fxFlex="1 1 100%" *ngIf="model.part_has_size">
+                    <md-input-container class="full-width" dividerColor="accent">
+                      <input [readonly]="isReadOnly()" mdInput required placeholder="Size: {{ model.part_unit }}:" name="Quantity"/>
+                    </md-input-container>
+                  </div>
+
+                </div>
+              </div>
+        </scrollWrapper>
+
+      </md-card-content> 
+    </md-card>
+  </div>
+
+  <div fxFlex="1 1 100%" fxLayout="column" fxLayout.gt-sm="row" #controlButtons>
+    <div fxFlex="1 1 100%" fxFlex.gt-sm="1 1 100%">
+      <md-card class="card card-center"> 
+        <md-card-header class="card-header">
+          <md-toolbar color="primary">
+            Add Parts from Template
+          </md-toolbar>
+        </md-card-header>
+
+        <md-card-content class="card-content"> 
+          <div fxLayout="column">
+            <div fxFlex="1 1 100%">
+              This function will allow you to add parts to this order from a template. If the parts in the template
+              do not already exist in the MPL, they will be added with the appropriate data
+            </div>
+
+            <div fxFlex="0 0 5px"></div>
+
+            <div fxFlex="1 1 100%" fxLayout="row">
+              <div fxFlex="0 0.5 30%" fxLayoutAlign="start center">
+                Upload a file:
+              </div>
+
+              <div fxFlex="0 0 10px">
+              </div>
+
+              <div fxFlex="1 1 50%" fxLayoutAlign="start center">
+                <input type="file" (change)="fileChange($event)" placeholder="Upload file..."/>
+              </div>
+            </div>
+
+            <div fxFlex="0 0 5px"></div>
+
+            <div fxLayout="row" fxFlex="1 1 100%">
+              <div fxLayoutAlign="start center" fxFlex="1 1 100%">
+                <button md-raised-button class="full-width" (click)="download()">Download Template</button>
+              </div>
+
+              <div fxFlex="0 0 5px"></div>
+              
+              <div fxLayoutAlign="start center" fxFlex="1 1 100%">
+                <button md-raised-button class="full-width" color="accent" (click)="upload()">Upload Template</button>
+              </div>
+            </div>
+          </div>
+        </md-card-content> 
+      </md-card>
+    </div>
+
+    <div class="right-container" fxFlex="1 1 100%" fxFlex.gt-sm="1 1 100%"> 
+      <md-card class="card card-center" *ngIf="viewType == 'Add'"> 
+        <md-card-header class="card-header">
+          <md-toolbar color="primary">
+            Set Order TR*
+          </md-toolbar>
+        </md-card-header>
+
+        <md-card-content class="card-content"> 
+          <div fxLayout="column">
+            <div fxLayout="row" fxFlex="1 1 100%">
+              Assign this order to a TR by number or browse for it
+            </div>
+
+            <div fxFlex="0 0 5px"></div>
+
+            <div fxLayout="row" fxFlex="1 1 100%">
+              <div fxFlex="1 1 100%">
+                <md-input-container class="full-width" dividerColor="accent">
+                  <input required mdInput [(ngModel)]="model.tr_id" placeholder="Enter TR" name="trNum"/>
+                </md-input-container>
+              </div>
+
+              <div fxFlex="0 0 5px"></div>
+
+              <div fxFlex="1 1 100%">
+                <button md-raised-button class="full-width" color="accent">Set TR</button>
+              </div>
+            </div>
+
+            <div fxFlex="0 0 5px"></div>
+
+            <div fxFlex="1 1 100%">
+              <button md-raised-button class="full-width">Search TRs</button>
+            </div>
+          </div>
+        </md-card-content> 
+      </md-card>
+    </div>
+  </div>
+</div>
