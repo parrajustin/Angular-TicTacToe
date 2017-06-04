@@ -1,11 +1,7 @@
 import { Routes } from '@angular/router';
 
 // components
-import { ListComponent } from './components/home';
-import { SingleComponent } from './components/single';
-import { NoContentComponent } from './components/no-content';
-import { MyComponent } from './components/my';
-import { SplashComponent } from './components/Splash';
+import { BoardComponent } from './components/board';
 
 /**
  * Not to sure why this is necessary but if you remove it
@@ -18,10 +14,10 @@ import { SplashComponent } from './components/Splash';
 import { DataResolver } from './app.resolver';
 
 export const ROUTES: Routes = [
-  { path: '',      component: SplashComponent },
-  { path: 'home/:list',  component: ListComponent },
-  { path: 'home',  component: ListComponent },
-  { path: 'assignments', component: MyComponent },
-  { path: 'access', loadChildren: './components/+single#SingleModule' },
-  { path: '**',    component: NoContentComponent },
+  { path: '',      component: BoardComponent },
+  // { path: 'home/:list',  component: ListComponent },
+  // { path: 'home',  component: ListComponent },
+  // { path: 'assignments', component: MyComponent },
+  // { path: 'access', loadChildren: './components/+single#SingleModule' },
+  { path: '**',    component: BoardComponent },
 ];
