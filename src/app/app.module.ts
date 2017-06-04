@@ -20,12 +20,13 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 
 // App is our top level component
 import { AppComponent } from './app.component';
-import { ListComponent } from './components/home';
-import { MapComponent } from './components/map';
-import { NoContentComponent } from './components/no-content';
-import { MyComponent } from './components/my';
-import { SplashComponent } from './components/Splash';
-import { ScrollModule } from './components/scrollWrapper';
+import { BoardComponent } from './components/board';
+// import { ListComponent } from './components/home';
+// import { MapComponent } from './components/map';
+// import { NoContentComponent } from './components/no-content';
+// import { MyComponent } from './components/my';
+// import { SplashComponent } from './components/Splash';
+// import { ScrollModule } from './components/scrollWrapper';
 
 // App state
 import { StoreModule } from '@ngrx/store';
@@ -48,14 +49,10 @@ const APP_PROVIDERS = [
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    ListComponent,
-    MapComponent,
-    NoContentComponent,
+    BoardComponent,
     GetDataPipe,
     GetDataHeaders,
     InCart,
-    MyComponent,
-    SplashComponent
   ],
   imports: [ // import Angular's modules
     FlexLayoutModule,
@@ -71,7 +68,6 @@ const APP_PROVIDERS = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    ScrollModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
 
     /**
