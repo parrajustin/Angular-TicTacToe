@@ -1,6 +1,5 @@
 // Angular imports
-import { MdIconModule, MdSidenavModule, MdTooltipModule, MdToolbarModule, MdCardModule, MdInputModule,
-  MdMenuModule, MdButtonModule } from '@angular/material';
+import { MdSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +20,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board';
+import { NodeComponent } from './components/node';
 // import { ListComponent } from './components/home';
 // import { MapComponent } from './components/map';
 // import { NoContentComponent } from './components/no-content';
@@ -50,6 +50,7 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     BoardComponent,
+    NodeComponent,
     GetDataPipe,
     GetDataHeaders,
     InCart,
@@ -57,14 +58,7 @@ const APP_PROVIDERS = [
   imports: [ // import Angular's modules
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MdIconModule,
-    MdSidenavModule,
-    MdTooltipModule,
-    MdToolbarModule,
-    MdCardModule,
-    MdInputModule,
-    MdButtonModule,
-    MdMenuModule,
+    MdSnackBarModule,
     BrowserModule,
     FormsModule,
     HttpModule,
