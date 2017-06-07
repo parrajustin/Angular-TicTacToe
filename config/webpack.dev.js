@@ -193,8 +193,8 @@ module.exports = function (options) {
        * See: https://github.com/SimenB/add-asset-html-webpack-plugin
        */
       new AddAssetHtmlPlugin([
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`), includeSourcemap: false },
+        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`), includeSourcemap: false }
       ]),
 
       /**
