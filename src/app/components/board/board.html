@@ -1,1 +1,7 @@
-TEST
+<div class="container" fxLayout="column">
+  <div fxFlex="1 1 100%" fxLayout="row" *ngFor="let num of [0, 1, 2]">
+    <node [state]="board[num * 3 + 0]" (click)="onClick(num * 3 + 0)"></node>
+    <node [state]="board[num * 3 + 1]" (click)="onClick(num * 3 + 1)"></node>
+    <node [state]="board[num * 3 + 2]" (click)="onClick(num * 3 + 2)"></node>
+  </div>
+</div>
